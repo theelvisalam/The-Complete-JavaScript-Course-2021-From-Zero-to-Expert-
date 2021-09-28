@@ -122,11 +122,31 @@ GOOD LUCK 😀
 // checkDogs([3, 5, 2, 12, 7], [4, 1, 15, 8, 3]);
 // checkDogs([9, 16, 6, 8, 3], [10, 5, 6, 1, 4]);
 
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+calcDisplayBalance(account1.movements);
+
+const createUsernames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+
+createUsernames(accounts);
+
+console.log(accounts);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
 
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 // SIMPLE ARRAY METHODS
@@ -205,28 +225,63 @@ GOOD LUCK 😀
 //   console.log(`${value}: ${value}`);
 // });
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-const eurToUsd = 1.1;
+// const eurToUsd = 1.1;
 
-// const movementsUsd = movements.map(function (mov) {
-//   return mov * eurToUsd;
+// // const movementsUsd = movements.map(function (mov) {
+// //   return mov * eurToUsd;
+// // });
+
+// const movementsUsd = movements.map(mov => mov * eurToUsd);
+
+// console.log(movements);
+// console.log(movementsUsd);
+
+// const movementsUSDfor = [];
+// for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
+// console.log(movementsUSDfor);
+
+// const movementsDescriptions = movements.map(
+//   (mov, i) =>
+//     `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
+//       mov
+//     )}`
+// );
+// console.log(movementsDescriptions);
+
+// const deposits = movements.filter(function (mov, i, arr) {
+//   return mov > 0;
 // });
+// console.log(movements);
+// console.log(deposits);
 
-const movementsUsd = movements.map(mov => mov * eurToUsd);
+// const depositsFor = [];
+// for (const mov of movements) if (mov > 0) depositsFor.push(mov);
+// console.log(depositsFor);
 
-console.log(movements);
-console.log(movementsUsd);
+// const withdrawals = movements.filter(mov => mov < 0);
+// console.log(withdrawals);
 
-const movementsUSDfor = [];
-for (const mov of movements) movementsUSDfor.push(mov * eurToUsd);
-console.log(movementsUSDfor);
+// console.log(movements);
 
-let user = "Max";
+// ACCUMULATOR => SNOWBALL
+// const balance = movements.reduce(function (acc, cur, i, arr) {
+//   console.log(`Iteration ${i}: ${acc}`);
+//   return acc + cur;
+// }, 0);
+// console.log(balance);
 
-function sayHello(name) {
-    console.log("Hello ", name);
-    name = "Steven";
-}
+const balance = movements.reduce((acc, cur) => acc + cur, 0);
+console.log(balance);
 
-sayHello(user);
+let balance2 = 0;
+for (const mov of movements) balance2 += mov;
+console.log(balance2);
+
+// MAXIMUM VALUE
+const max = movements.reduce((acc, mov) => {
+  if (acc > mov) return acc;
+  else return mov;
+}, movements[0]);
+console.log(max);
